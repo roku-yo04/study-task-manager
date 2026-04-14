@@ -25,7 +25,7 @@ public class User {
     private String email;
     @Column(nullable = false,length = 255,name = "password_hash")
     private String password;
-    
+
     private Role role;
     private LocalDateTime createdAt;;
     private LocalDateTime updatedAt;
