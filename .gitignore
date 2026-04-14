@@ -1,0 +1,23 @@
+# Java / Spring Boot
+backend/target/
+*.log
+
+# IntelliJ
+.idea/
+*.iml
+
+# React
+frontend/node_modules/
+frontend/dist/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+frontend/.env
+backend/.env
