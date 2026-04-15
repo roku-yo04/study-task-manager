@@ -1,4 +1,7 @@
 package com.mta.studytaskmanager.enums;
 
-public class TaskPriority {
+public enum TaskPriority {
+    LOW,
+    MEDIUM,
+    HIGH;
 }
