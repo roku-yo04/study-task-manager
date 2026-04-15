@@ -22,4 +22,6 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private java.util.Set<User> users;
+
+
 }
