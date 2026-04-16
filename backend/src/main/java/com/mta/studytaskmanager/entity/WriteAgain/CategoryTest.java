@@ -1,4 +1,5 @@
-package com.mta.studytaskmanager.entity;
+package com.mta.studytaskmanager.entity.WriteAgain;
+
 import com.mta.studytaskmanager.entity.Task;
 import com.mta.studytaskmanager.entity.User;
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "categories",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "name"})})
-public class Category {
+public class CategoryTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,10 +1,12 @@
-package com.mta.studytaskmanager.entity;
+package com.mta.studytaskmanager.entity.WriteAgain;
 
+import com.mta.studytaskmanager.entity.Category;
+import com.mta.studytaskmanager.entity.Role;
+import com.mta.studytaskmanager.entity.Task;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -18,7 +20,7 @@ import java.util.Set;
 @Builder
 @Table(name = "users")
 
-public class User {
+public class UserTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // cho phép tự động tăng giá trị của id và  sử dụng chiến lược tăng dần (IDENTITY) để tạo giá trị id mới khi thêm bản ghi mới vào bảng users
     private Long id;
@@ -70,5 +72,5 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles  = new HashSet<>();
-    // set để không trùng lặp role của user
+     // set để không trùng lặp role của user
 }
