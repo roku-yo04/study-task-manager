@@ -1,5 +1,6 @@
 package com.mta.studytaskmanager.entity;
-
+import com.mta.studytaskmanager.entity.Category;
+import com.mta.studytaskmanager.entity.User;
 import com.mta.studytaskmanager.enums.TaskPriority;
 import com.mta.studytaskmanager.enums.TaskStatus;
 import jakarta.persistence.*;
@@ -15,9 +16,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +26,17 @@ public class Task {
 
     @Column(nullable = false,length = 255)
     private String title;
-
     @Column(length = 1000)
     private String description;
-
-    @Column(nullable = false,length = 20)
     @Enumerated(EnumType.STRING)
+    @Column
     private TaskStatus status;
 
-    @Column(nullable = false,length = 20)
     @Enumerated(EnumType.STRING)
+    @Column
     private TaskPriority priority;
-
-    @Column(name = "due_date")
+    // hạn chót: chỉ cần biết ngày giờ , k cần rõ chi tiết mấy phút,giây.
+    @Column(name = "due_date", nullable = true)
     private LocalDate dueDate;
 
     @CreationTimestamp
@@ -52,7 +51,9 @@ public class Task {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // khi load task thì k cần load category, nên để LAZY,
+    // chỉ load thêm category khi cần thiết, tránh việc load nhiều dữ liệu.
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id") // maping với category_id trong bảng task, để biết task thuộc category nào.
     private Category category;
 }
