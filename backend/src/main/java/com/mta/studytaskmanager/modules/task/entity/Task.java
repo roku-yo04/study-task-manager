@@ -1,5 +1,8 @@
 package com.mta.studytaskmanager.modules.task.entity;
+import com.mta.studytaskmanager.core.common.BaseEntity;
 import com.mta.studytaskmanager.modules.category.entity.Category;
+import com.mta.studytaskmanager.modules.task.enums.TaskPriority;
+import com.mta.studytaskmanager.modules.task.enums.TaskStatus;
 import com.mta.studytaskmanager.modules.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +20,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class Task extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,14 +39,6 @@ public class Task {
     // hạn chót: chỉ cần biết ngày giờ , k cần rõ chi tiết mấy phút,giây.
     @Column(name = "due_date", nullable = true)
     private LocalDate dueDate;
-
-    @CreationTimestamp
-    @Column(name = "created_at",nullable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at",nullable = false)
-    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

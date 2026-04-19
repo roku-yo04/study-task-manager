@@ -1,6 +1,7 @@
 package com.mta.studytaskmanager.modules.task.repository;
 
 import com.mta.studytaskmanager.modules.task.entity.Task;
+import com.mta.studytaskmanager.modules.task.enums.TaskStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

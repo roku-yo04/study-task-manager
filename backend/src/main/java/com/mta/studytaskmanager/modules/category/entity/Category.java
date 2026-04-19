@@ -1,4 +1,5 @@
 package com.mta.studytaskmanager.modules.category.entity;
+import com.mta.studytaskmanager.core.common.BaseEntity;
 import com.mta.studytaskmanager.modules.task.entity.Task;
 import com.mta.studytaskmanager.modules.user.entity.User;
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "categories",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "name"})})
-public class Category {
+public class Category extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,14 +31,6 @@ public class Category {
 
     @Column(nullable = false,length = 7)
     private String color = "#3357FF";
-
-    @Column(name = "created_at" ,nullable = false, updatable = false)
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false,name = "updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 
     // DB: foreign key còn java: object
     @ManyToOne(fetch = FetchType.LAZY)

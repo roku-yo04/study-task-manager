@@ -1,4 +1,5 @@
 package com.mta.studytaskmanager.modules.role.entity;
+import com.mta.studytaskmanager.modules.role.enums.RoleName;
 import com.mta.studytaskmanager.modules.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "name",nullable = false, unique = true, length = 50)
-    private String roleName;
+    private RoleName roleName;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();

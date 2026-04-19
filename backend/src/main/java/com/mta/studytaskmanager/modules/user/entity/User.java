@@ -1,5 +1,6 @@
 package com.mta.studytaskmanager.modules.user.entity;
 
+import com.mta.studytaskmanager.core.common.BaseEntity;
 import com.mta.studytaskmanager.modules.category.entity.Category;
 import com.mta.studytaskmanager.modules.role.entity.Role;
 import com.mta.studytaskmanager.modules.task.entity.Task;
@@ -20,10 +21,11 @@ import java.util.Set;
 @Builder
 @Table(name = "users")
 
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // cho phép tự động tăng giá trị của id và  sử dụng chiến lược tăng dần (IDENTITY) để tạo giá trị id mới khi thêm bản ghi mới vào bảng users
     private Long id;
+
     @Column(name = "username", nullable = false, unique = true, length = 50)
     private String username;
     // đảm bảo username không được null, phải là duy nhất và có độ dài tối đa 50 ký tự
@@ -40,22 +42,11 @@ public class User {
     @Column(name = "display_name",length = 100)
     private String displayName;
 
-
     @ColumnDefault("1") // Khi câu lệnh SQL INSERT thực thi tại DB.
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
     // mặc định là true, có nghĩa là tài khoản sẽ được kích hoạt khi tạo mới. Nếu muốn vô hiệu hóa tài khoản
     // Check khi login ,gọi api + xử lí task, category thì sẽ check trường isActive nếu false thì sẽ trả về lỗi tài khoản bị vô hiệu hóa
-
-    // không cho cập nhật giá trị của createdAt sau khi bản ghi đã được tạo, đảm bảo rằng giá trị có tính lịch sử và không bị thay đổi sau khi bản ghi đã được tạo
-    @CreationTimestamp // khi tạo 1 user sẽ gắn thời gian hiện tại vào.
-    // đỡ code thử công như LocalDateTime.now() khi tạo mới user, tránh việc quên gán thời gian tạo cho user mới
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp // khi cập nhật 1 user sẽ gắn thời gian hiện tại vào.
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Category> categories = new HashSet<>();
