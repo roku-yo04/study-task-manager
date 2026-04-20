@@ -1,7 +1,7 @@
 package com.mta.studytaskmanager.modules.role.enums;
 
 public enum RoleName {
-    USER,
-    ADMIN,
-    MODERATOR;
+    ROLE_USER,
+    ROLE_ADMIN,
+    ROLE_MODERATOR;
 }

@@ -2,6 +2,7 @@ package com.mta.studytaskmanager.modules.task.repository;
 
 import com.mta.studytaskmanager.modules.task.entity.Task;
 import com.mta.studytaskmanager.modules.task.enums.TaskStatus;
+import com.mta.studytaskmanager.modules.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,4 +34,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     // Xóa trực tiếp theo id + user (optional)
     void deleteByIdAndUserId(Long id, Long userId);
+
+    long countByUser(User user);
 }
