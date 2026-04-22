@@ -4,15 +4,14 @@ import com.mta.studytaskmanager.core.common.BaseEntity;
 import com.mta.studytaskmanager.modules.category.entity.Category;
 import com.mta.studytaskmanager.modules.role.entity.Role;
 import com.mta.studytaskmanager.modules.task.entity.Task;
+import com.mta.studytaskmanager.modules.user.enums.PlanType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.spi.ToolProvider;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +26,7 @@ public class User extends BaseEntity {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true, length = 50)
-    private String username;
+    private String userName;
     // đảm bảo username không được null, phải là duy nhất và có độ dài tối đa 50 ký tự
     // -> trường hợp userlogin trùng nhau sẽ bị lỗi, không cho phép tạo mới
 
@@ -48,6 +47,11 @@ public class User extends BaseEntity {
     // mặc định là true, có nghĩa là tài khoản sẽ được kích hoạt khi tạo mới. Nếu muốn vô hiệu hóa tài khoản
     // Check khi login ,gọi api + xử lí task, category thì sẽ check trường isActive nếu false thì sẽ trả về lỗi tài khoản bị vô hiệu hóa
 
+    // set PLAN mặc định là free khi tạo user.
+    @Enumerated(EnumType.STRING)
+    @Column(name = "plan", nullable = false, length = 20)
+    private PlanType planType = PlanType.FREE;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Category> categories = new HashSet<>();
     // set để không trùng lặp category của user.
@@ -63,5 +67,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles  = new HashSet<>();
+
+
     // set để không trùng lặp role của user
 }

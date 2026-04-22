@@ -2,10 +2,7 @@ package com.mta.studytaskmanager.modules.role.entity;
 import com.mta.studytaskmanager.modules.role.enums.RoleName;
 import com.mta.studytaskmanager.modules.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Builder
+@Setter
+@Getter
 @Table(name = "roles")
 public class Role {
     @Id
@@ -29,6 +28,7 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
+
 
 
 }
